@@ -12,24 +12,23 @@ import java.util.function.Supplier;
 public class BaseballController {
     public void run() {
         OutputView.printGameStartMessage();
-        while (true) {
-            CorrectNumber correctNumber = createCorrectNumber();
-            while (true) {
-                List<Integer> userNumbers = readUserNumber();
-                GameResult gameResult = correctNumber.checkNumber(userNumbers);
-                OutputView.printResult(gameResult);
+        do {
+            playOneGame();
+        } while (checkRestart());
+    }
 
-                if (gameResult.isOver()) {
-                    break;
-                }
-            }
-            OutputView.printGameOverMessage();
-            int restartInput = InputView.readRestartInput();
+    private void playOneGame() {
+        boolean isOver = false;
+        CorrectNumber correctNumber = createCorrectNumber();
 
-            if (restartInput == 2) {
-                break;
-            }
+        while (!isOver) {
+            List<Integer> userNumbers = readUserNumber();
+            GameResult gameResult = correctNumber.checkNumber(userNumbers);
+            OutputView.printResult(gameResult);
+            isOver = gameResult.isOver();
         }
+
+        OutputView.printGameOverMessage();
     }
 
     private CorrectNumber createCorrectNumber() {
@@ -39,6 +38,16 @@ public class BaseballController {
 
     private List<Integer> readUserNumber() {
         return readWithRetry(InputView::readUserNumber);
+    }
+
+    private boolean checkRestart() {
+        int restartInput = InputView.readRestartInput();
+
+        if (restartInput == 2) {
+            return false;
+        }
+
+        return true;
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {
