@@ -12,9 +12,24 @@ import java.util.function.Supplier;
 public class BaseballController {
     public void run() {
         OutputView.printGameStartMessage();
-        CorrectNumber correctNumber = createCorrectNumber();
-        List<Integer> userNumbers = readUserNumber();
-        GameResult gameResult = correctNumber.checkNumber(userNumbers);
+        while (true) {
+            CorrectNumber correctNumber = createCorrectNumber();
+            while (true) {
+                List<Integer> userNumbers = readUserNumber();
+                GameResult gameResult = correctNumber.checkNumber(userNumbers);
+                OutputView.printResult(gameResult);
+
+                if (gameResult.isOver()) {
+                    break;
+                }
+            }
+            OutputView.printGameOverMessage();
+            int restartInput = InputView.readRestartInput();
+
+            if (restartInput == 2) {
+                break;
+            }
+        }
     }
 
     private CorrectNumber createCorrectNumber() {

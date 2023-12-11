@@ -1,5 +1,6 @@
 package baseball.util;
 
+import static baseball.util.ExceptionMessage.INVALID_RESTART_INPUT;
 import static baseball.util.ExceptionMessage.INVALID_USER_NUMBER;
 
 import java.util.Arrays;
@@ -39,4 +40,9 @@ public class Validator {
         }
     }
 
+    public static void validateRestartInput(String input) {
+        if (!input.equals("1") && !input.equals("2")) {
+            throw new IllegalArgumentException(INVALID_RESTART_INPUT.message());
+        }
+    }
 }
