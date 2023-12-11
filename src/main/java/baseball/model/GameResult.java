@@ -22,7 +22,7 @@ public class GameResult {
         return "낫싱";
     }
 
-    public boolean isOver() {
+    public boolean isThreeStrike() {
         return strikeCount == 3;
     }
 }

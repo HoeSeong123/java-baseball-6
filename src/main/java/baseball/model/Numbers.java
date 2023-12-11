@@ -2,10 +2,10 @@ package baseball.model;
 
 import java.util.List;
 
-public class CorrectNumber {
+public class Numbers {
     private List<Integer> correctNumbers;
 
-    public CorrectNumber(List<Integer> numbers) {
+    public Numbers(List<Integer> numbers) {
         correctNumbers = numbers;
     }
 
