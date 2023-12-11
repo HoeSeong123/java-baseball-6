@@ -2,6 +2,7 @@ package baseball.controller;
 
 import baseball.model.BaseballNumberGenerator;
 import baseball.model.CorrectNumber;
+import baseball.model.GameResult;
 import baseball.model.RandomNumberGenerator;
 import baseball.view.InputView;
 import baseball.view.OutputView;
@@ -12,7 +13,8 @@ public class BaseballController {
     public void run() {
         OutputView.printGameStartMessage();
         CorrectNumber correctNumber = createCorrectNumber();
-        List<Integer> userNumber = readUserNumber();
+        List<Integer> userNumbers = readUserNumber();
+        GameResult gameResult = correctNumber.checkNumber(userNumbers);
     }
 
     private CorrectNumber createCorrectNumber() {
